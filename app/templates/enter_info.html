@@ -1,0 +1,31 @@
+{% extends 'bootstrap/base.html' %}
+
+    {% block title %}
+        {% if title %}{{ title }}{% else %}The Wall{% endif %}
+    {% endblock %}
+
+{% block content %}
+    <div class="container" style="position: fixed;
+                                  top: 50%;
+                                  left: 50%;
+                                  width: 300px;
+                                  height: 200px;
+                                  margin: -100px 0 0 -150px;
+                                  ">
+        <h1 style="text-align: center">Upload wallets</h1>
+        <div  style="display: flex;
+                     justify-content: center;">
+              <form action='' method="post" enctype="multipart/form-data" style="display: flex;">
+                <input type=file name=file value="parse" class="btn btn-default">
+                <input type=hidden name="index" value="parse">
+                <input type=submit value='Parse it' class="btn btn-default">
+              </form>
+        </div>
+    </div>
+<!--    <form action='' method="post" enctype="multipart/form-data">-->
+<!--        <input type=file name=file value="parse">-->
+<!--        <input type=hidden name="index" value="parse">-->
+<!--        <input type=submit value='Parse it'>-->
+<!--    </form>-->
+{% endblock %}
+

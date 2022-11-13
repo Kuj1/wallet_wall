@@ -1,0 +1,34 @@
+{% extends 'bootstrap/base.html' %}
+    {% block title %}
+        {% if title %}{{ title }}{% else %}The Wall{% endif %}
+    {% endblock %}
+
+{% block content %}
+    <div>
+        <div class="container">
+            <input type="button" style="text-align: center;
+                                        display: flex;
+                                        margin: 10px auto auto auto;"
+                   onclick="history.back(-2); return false;" value="К загрузке данных" class="btn btn-default"/>
+            <h1 style="text-align: center">
+                The Wall
+            </h1 >
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Link</th>
+                        <th>Money in wallet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for wallet, val in wallets.items() %}
+                    <tr>
+                        <td><a style="cursor: pointer;" href="{{ wallet }}" target="_blank">{{ wallet }}</a></td>
+                        <td>{{ val }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
