@@ -1,3 +1,5 @@
+#!/root/.cache/pypoetry/virtualenvs/wallet-wall-VRzasuB_-py3.11/bin/python
+
 from config import Config
 
 import time
@@ -33,11 +35,14 @@ if not os.path.exists(data_folder):
 ua = UserAgent(verify_ssl=False)
 
 options = webdriver.ChromeOptions()
+options.add_argument('--no-sandbox')
 options.add_argument('--disable-blink-features=AutomationControlled')
 options.add_argument(f'--user-agent={ua.random}')
-options.add_argument('start-maximized')
+options.add_argument('--start-maximized')
 options.add_argument('--headless')
 options.add_argument('--enable-javascript')
+options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--disable-extensions")
 
 
 def rename(path):
@@ -165,5 +170,4 @@ def wall():
 
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
+    app.run(host='65.108.242.133', debug=True)
