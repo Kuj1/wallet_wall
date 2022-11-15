@@ -1,9 +1,10 @@
-from app.config import Config
+from config import Config
 
 import time
 import os
 import concurrent.futures
 import shutil
+import re
 from multiprocessing import cpu_count
 
 from flask import Flask
@@ -135,6 +136,7 @@ def upload_file():
 
 @app.route('/wall')
 def wall():
+
     wallets = dict()
     res_file = os.listdir(data_folder)
     try:
@@ -144,7 +146,9 @@ def wall():
             with open(os.path.join(data_folder, 'result.txt'), 'r') as f:
                 for wallet in f.readlines():
                     full_wallet = wallet.replace('\n', '').split(' ')
-                    wallets[full_wallet[0].strip()] = full_wallet[2].strip()
+                    value_wallet = full_wallet[2].strip()
+                    nice_wallet = re.sub(r'[-+.]\d+|%', '', value_wallet)
+                    wallets[full_wallet[0].strip()] = nice_wallet
 
         return render_template('wall.html', title='The wall', wallets=wallets)
 
@@ -153,7 +157,9 @@ def wall():
             with open(os.path.join(data_folder, 'result.txt'), 'r') as f:
                 for wallet in f.readlines():
                     full_wallet = wallet.replace('\n', '').split(' ')
-                    wallets[full_wallet[0].strip()] = full_wallet[2].strip()
+                    value_wallet = full_wallet[2].strip()
+                    nice_wallet = re.sub(r'[-+.]\d+|%', '', value_wallet)
+                    wallets[full_wallet[0].strip()] = nice_wallet
 
         return render_template('wall.html', title='The wall', wallets=wallets)
 
